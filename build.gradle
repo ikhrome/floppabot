@@ -1,0 +1,49 @@
+group 'com.github.ikhrome'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:6.1.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
+
+shadowJar {
+    manifest.attributes.put("Main-Class", "com.github.ikhrome.floppa.bot.Worker")
+}
+
+dependencies {
+    // JDA and Discord libraries
+    implementation 'net.dv8tion:JDA:4.2.1_255'
+    implementation 'com.jagrosh:jda-utilities:3.0.5'
+    implementation 'com.jagrosh:jda-utilities-command:3.0.5'
+
+    // Audio utilities
+    implementation 'com.sedmelluq:lavaplayer:1.3.47'
+
+    // REST API and JSON services
+    implementation 'com.konghq:unirest-java:3.11.09'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // Logging
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'org.slf4j:slf4j-simple:1.7.30'
+}
